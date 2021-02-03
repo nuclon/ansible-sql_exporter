@@ -1,7 +1,7 @@
 ---
-- name: restart <<APPLICATION>>
+- name: restart sql_exporter
   become: true
   systemd:
     daemon_reload: true
-    name: <<APPLICATION>>
+    name: sql_exporter
     state: restarted

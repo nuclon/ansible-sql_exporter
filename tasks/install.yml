@@ -1,14 +1,14 @@
 ---
-- name: Create the <<APPLICATION>> group
+- name: Create the sql_exporter group
   group:
-    name: "{{ <<APPLICATION>>_system_group }}"
+    name: "{{ sql_exporter_system_group }}"
     state: present
     system: true
 
-- name: Create the <<APPLICATION>> user
+- name: Create the sql_exporter user
   user:
-    name: "{{ <<APPLICATION>>_system_user }}"
-    groups: "{{ <<APPLICATION>>_system_group }}"
+    name: "{{ sql_exporter_system_user }}"
+    groups: "{{ sql_exporter_system_group }}"
     append: true
     shell: /usr/sbin/nologin
     system: true

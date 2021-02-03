@@ -1,17 +1,17 @@
 {{ ansible_managed | comment }}
 
 [Unit]
-Description=<<APPLICATION>>
+Description=sql_exporter
 After=network-online.target
 StartLimitInterval=0
 StartLimitIntervalSec=0
 
 [Service]
 Type=simple
-User={{ <<APPLICATION>>_system_user }}
-Group={{ <<APPLICATION>>_system_group }}
-ExecStart=/usr/local/bin/<<APPLICATION>>
-SyslogIdentifier=<<APPLICATION>>
+User={{ sql_exporter_system_user }}
+Group={{ sql_exporter_system_group }}
+ExecStart=/usr/local/bin/sql_exporter
+SyslogIdentifier=sql_exporter
 Restart=always
 RestartSec=5
 

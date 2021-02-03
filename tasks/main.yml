@@ -6,31 +6,31 @@
     - "{{ ansible_distribution | lower }}.yml"
     - "{{ ansible_os_family | lower }}.yml"
   tags:
-    - <<APPLICATION>>_install
-    - <<APPLICATION>>_configure
-    - <<APPLICATION>>_run
+    - sql_exporter_install
+    - sql_exporter_configure
+    - sql_exporter_run
 
 - import_tasks: preflight.yml
   tags:
-    - <<APPLICATION>>_install
-    - <<APPLICATION>>_configure
-    - <<APPLICATION>>_run
+    - sql_exporter_install
+    - sql_exporter_configure
+    - sql_exporter_run
 
 - import_tasks: install.yml
   become: true
   tags:
-    - <<APPLICATION>>_install
+    - sql_exporter_install
 
 - import_tasks: configure.yml
   become: true
   tags:
-    - <<APPLICATION>>_configure
+    - sql_exporter_configure
 
-- name: Ensure <<APPLICATION>> is enabled on boot
+- name: Ensure sql_exporter is enabled on boot
   become: true
   systemd:
     daemon_reload: true
-    name: <<APPLICATION>>
+    name: sql_exporter
     enabled: true
   tags:
-    - <<APPLICATION>>_run
+    - sql_exporter_run
