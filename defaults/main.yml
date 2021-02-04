@@ -1,2 +1,22 @@
 ---
+sql_exporter_version: 0.5
 sql_exporter_web_listen_address: "0.0.0.0:9399"
+
+sql_exporter_system_user: "sql-exp"
+sql_exporter_system_group: "sql-exp"
+
+sql_exporter_binary_install_dir: "/usr/local/bin"
+sql_exporter_config_dir: "/etc/sql_exporter"
+
+sql_exporter_globals:
+  scrape_timeout_offset: 500ms
+  min_interval: 0s
+  max_connections: 3
+  max_idle_connections: 3
+
+sql_exporter_data_source_name: ""
+sql_exporter_collectors: []
+sql_exporter_collector_files:
+  - "{{ sql_exporter_config_dir}}/*.collector.yml"
+
+

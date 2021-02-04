@@ -7,3 +7,20 @@
     group: root
     mode: 0644
   notify: restart sql_exporter
+
+- name: Create sql_exporter config directory
+  file:
+    path: "{{ sql_exporter_config_dir }}"
+    state: directory
+    owner: root
+    group: "{{ sql_exporter_system_group }}"
+    mode: u+rwX,g+rwX,o=
+
+- name: Copy the sql_exporter config file
+  template:
+    src: sql_exporter.yml.j2
+    dest: "{{ sql_exporter_config_dir }}/sql_exporter.yml"
+    owner: root
+    group: "{{ sql_exporter_system_group }}"
+    mode: u+rw,g+r,o=
+  notify: restart sql_exporter

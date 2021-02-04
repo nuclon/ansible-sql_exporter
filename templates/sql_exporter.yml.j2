@@ -1,0 +1,6 @@
+global: {{ sql_exporter_globals | to_yaml(indent=4) }}
+target:
+    data_source_name: {{ sql_exporter_data_source_name }}
+    collectors: {{ sql_exporter_collectors | to_yaml }}
+
+collector_files: {{ sql_exporter_collector_files | to_yaml }}

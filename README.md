@@ -1,13 +1,12 @@
 # Ansible Role: sql_exporter
 
-[![Build Status](https://travis-ci.com/cloudalchemy/ansible-sql_exporter.svg?branch=master)](https://travis-ci.com/cloudalchemy/ansible-sql_exporter)
 [![License](https://img.shields.io/badge/license-MIT%20License-brightgreen.svg)](https://opensource.org/licenses/MIT)
-[![Ansible Role](https://img.shields.io/badge/ansible%20role-cloudalchemy.sql_exporter-blue.svg)](https://galaxy.ansible.com/cloudalchemy/sql_exporter/)
-[![GitHub tag](https://img.shields.io/github/tag/cloudalchemy/ansible-sql_exporter.svg)](https://github.com/cloudalchemy/ansible-sql_exporter/tags)
+[![Ansible Role](https://img.shields.io/badge/ansible%20role-nuclon.sql_exporter-blue.svg)](https://galaxy.ansible.com/nuclon/sql_exporter/)
+[![GitHub tag](https://img.shields.io/github/tag/nuclon/ansible-sql_exporter.svg)](https://github.com/nuclon/ansible-sql_exporter/tags)
 
 ## Description
 
-Deploy [sql_exporter](https://github.com/prometheus/sql_exporter) using ansible.
+Deploy [sql_exporter](https://github.com/free/sql_exporter) using ansible.
 
 ## Requirements
 
@@ -29,7 +28,7 @@ Use it in a playbook as follows:
 ```yaml
 - hosts: all
   roles:
-    - cloudalchemy.sql_exporter
+    - nuclon.sql_exporter
 ```
 
 ## Local Testing

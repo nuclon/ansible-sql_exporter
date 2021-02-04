@@ -14,3 +14,41 @@
     system: true
     createhome: false
     home: /
+
+- block:
+    - name: download sql_exporter binary to local folder
+      become: false
+      get_url:
+        url: "https://github.com/free/sql_exporter/releases/download/v{{ sql_exporter_version }}/sql_exporter-{{ sql_exporter_version }}.linux-{{ go_arch }}.tar.gz"
+        dest: "/tmp/sql_exporter-{{ sql_exporter_version }}.linux-{{ go_arch }}.tar.gz"
+        checksum: "sha256:{{ sql_exporter_checksum }}"
+      register: _download_archive
+      until: _download_archive is succeeded
+      retries: 5
+      delay: 2
+      # run_once: true # <-- this can't be set due to multi-arch support
+      delegate_to: localhost
+      check_mode: false
+
+    - name: unpack sql_exporter binaries
+      become: false
+      unarchive:
+        src: "/tmp/sql_exporter-{{ sql_exporter_version }}.linux-{{ go_arch }}.tar.gz"
+        dest: "/tmp"
+        mode: 0755
+        creates: "/tmp/sql_exporter-{{ sql_exporter }}-{{ go_arch }}/sql_exporter"
+      delegate_to: localhost
+      check_mode: false
+
+    - name: propagate official sql_exporter binaries
+      copy:
+        src: "/tmp/sql_exporter-{{ sql_exporter_version }}.linux-{{ go_arch }}/{{ item }}"
+        dest: "{{ sql_exporter_binary_install_dir }}/{{ item }}"
+        mode: 0755
+        owner: root
+        group: root
+      with_items:
+        - sql_exporter
+      notify:
+        - restart sql_exporter
+
