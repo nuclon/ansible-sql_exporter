@@ -10,7 +10,9 @@ StartLimitIntervalSec=0
 Type=simple
 User={{ sql_exporter_system_user }}
 Group={{ sql_exporter_system_group }}
-ExecStart=/usr/local/bin/sql_exporter
+ExecStart=/usr/local/bin/sql_exporter \
+    -config.file {{ sql_exporter_config_dir }}/sql_exporter.yml \
+    -web.listen-address {{sql_exporter_web_listen_address }}
 SyslogIdentifier=sql_exporter
 Restart=always
 RestartSec=5

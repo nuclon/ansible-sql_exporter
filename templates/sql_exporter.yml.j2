@@ -1,6 +1,8 @@
-global: {{ sql_exporter_globals | to_yaml(indent=4) }}
+global:
+  {{ sql_exporter_globals | to_nice_yaml(indent=2) | indent(2, False) }}
 target:
-    data_source_name: {{ sql_exporter_data_source_name }}
-    collectors: {{ sql_exporter_collectors | to_yaml }}
+  data_source_name: {{ sql_exporter_data_source_name }}
+  collectors: {{ sql_exporter_collectors | map(attribute='collector_name') }}
 
-collector_files: {{ sql_exporter_collector_files | to_yaml }}
+collector_files:
+  {{ sql_exporter_collector_files | to_nice_yaml(indent=2) | indent(2, False) }}

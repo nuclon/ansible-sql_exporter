@@ -24,3 +24,13 @@
     group: "{{ sql_exporter_system_group }}"
     mode: u+rw,g+r,o=
   notify: restart sql_exporter
+
+- name: Collector files
+  template:
+    src: collector.yml.j2
+    dest: "{{ sql_exporter_config_dir }}/{{ item.collector_name }}.collector.yml"
+    owner: root
+    group: "{{ sql_exporter_system_group }}"
+    mode: u+rw,g+r,o=
+  notify: restart sql_exporter
+  with_items: "{{ sql_exporter_collectors }}"
