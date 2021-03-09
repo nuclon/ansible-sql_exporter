@@ -28,16 +28,30 @@ Use it in a playbook as follows:
 ```yaml
 - hosts: all
   roles:
-    - nuclon.sql_exporter
+    - role: nuclon.sql_exporter
+      sql_exporter_data_source_name: "mysql://user:password@tcp(mysql-host.corp.local:3306)/database_name"
+      sql_exporter_collectors:
+        - collector_name: service_data
+          metrics:
+            - metric_name: service_pending_events
+              type: gauge
+              help: "Not processed events count"
+              values: [cnt]
+              query: |
+                SELECT count(*) as cnt
+                FROM events
+                WHERE status=0
+            - metric_name: service_failed_events
+              type: gauge
+              help: "Failed events count"
+              values: [cnt]
+              query: |
+                SELECT count(*) as cnt
+                FROM events
+                WHERE
+                  failed = 1
 ```
-
-## Local Testing
-
-The preferred way of locally testing the role is to use Docker and [molecule](https://github.com/ansible-community/molecule) (v3.x). You will have to install Docker on your system. See "Get started" for a Docker package suitable to for your system. Running your tests is as simple as executing `molecule test`.
-
-## Continuous Intergation
-
-Combining molecule and circle CI allows us to test how new PRs will behave when used with multiple ansible versions and multiple operating systems. This also allows use to create test scenarios for different role configurations. As a result we have a quite large test matrix which can take more time than local testing, so please be patient.
+The role will generate a file for every entry in sql_exporter_collectors.
 
 ## Contributing
 
