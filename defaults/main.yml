@@ -18,5 +18,3 @@ sql_exporter_data_source_name: ""
 sql_exporter_collectors: []
 sql_exporter_collector_files:
   - "{{ sql_exporter_config_dir}}/*.collector.yml"
-
-

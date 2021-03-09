@@ -51,4 +51,3 @@
         - sql_exporter
       notify:
         - restart sql_exporter
-
