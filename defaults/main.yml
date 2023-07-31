@@ -1,5 +1,6 @@
 ---
-sql_exporter_version: "0.5"
+sql_exporter_repo: "burningalchemist/sql_exporter"
+sql_exporter_version: "0.11.1"
 sql_exporter_web_listen_address: "0.0.0.0:9399"
 
 sql_exporter_system_user: "sql-exp"

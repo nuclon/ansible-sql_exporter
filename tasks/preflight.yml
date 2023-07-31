@@ -7,7 +7,7 @@
 - block:
     - name: Get latest release
       uri:
-        url: "https://api.github.com/repos/free/sql_exporter/releases/latest"
+        url: "https://api.github.com/repos/{{ sql_exporter_repo }}/releases/latest"
         method: GET
         return_content: true
         status_code: 200
@@ -30,6 +30,6 @@
   set_fact:
     sql_exporter_checksum: "{{ item.split(' ')[0] }}"
   with_items:
-    - "{{ lookup('url', 'https://github.com/free/sql_exporter/releases/download/' + sql_exporter_version + '/sha256sums.txt', wantlist=True) | list }}"
+    - "{{ lookup('url', 'https://github.com/' + sql_exporter_repo + '/releases/download/' + sql_exporter_version + '/sha256sums.txt', wantlist=True) | list }}"
   when:
     - "('linux-' + go_arch + '.tar.gz') in item"

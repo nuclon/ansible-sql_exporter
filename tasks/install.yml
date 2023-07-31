@@ -19,7 +19,7 @@
     - name: download sql_exporter binary to local folder
       become: false
       get_url:
-        url: "https://github.com/free/sql_exporter/releases/download/{{ sql_exporter_version }}/sql_exporter-{{ sql_exporter_version }}.linux-{{ go_arch }}.tar.gz"
+        url: "https://github.com/{{ sql_exporter_repo }}/releases/download/{{ sql_exporter_version }}/sql_exporter-{{ sql_exporter_version }}.linux-{{ go_arch }}.tar.gz"
         dest: "/tmp/sql_exporter-{{ sql_exporter_version }}.linux-{{ go_arch }}.tar.gz"
         checksum: "sha256:{{ sql_exporter_checksum }}"
       register: _download_archive
